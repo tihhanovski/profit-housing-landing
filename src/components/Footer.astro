@@ -1,0 +1,23 @@
+---
+import type { Locale } from '../i18n/utils';
+
+interface Props {
+  locale: Locale;
+  t: (key: string) => string;
+}
+
+const { locale, t } = Astro.props;
+
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-[var(--line)] bg-white/60 py-8">
+  <div class="container-shell flex flex-col gap-4 text-sm text-[var(--muted)] md:flex-row md:items-center md:justify-between">
+    <p>Profit KÜ © {year}. {t('footer.rights')}</p>
+    <div class="flex gap-3">
+      <a class={locale === 'et' ? 'font-semibold text-[var(--ink)]' : ''} href="/">{t('lang.et')}</a>
+      <a class={locale === 'en' ? 'font-semibold text-[var(--ink)]' : ''} href="/en/">{t('lang.en')}</a>
+      <a class={locale === 'ru' ? 'font-semibold text-[var(--ink)]' : ''} href="/ru/">{t('lang.ru')}</a>
+    </div>
+  </div>
+</footer>

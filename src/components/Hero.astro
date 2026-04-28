@@ -1,0 +1,43 @@
+---
+interface Props {
+  t: (key: string) => string;
+}
+
+const { t } = Astro.props;
+---
+
+<section class="section">
+  <div class="container-shell grid items-center gap-8 md:grid-cols-2">
+    <div class="reveal">
+      <p class="mb-4 inline-block rounded-full border border-[var(--line)] bg-white px-4 py-1 text-sm text-[var(--muted)]">
+        {t('hero.badge')}
+      </p>
+      <h1 class="font-display text-4xl leading-tight md:text-5xl">{t('hero.title')}</h1>
+      <p class="mt-4 max-w-xl text-[var(--muted)]">{t('hero.subtitle')}</p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="#contact" class="btn-primary">{t('hero.ctaPrimary')}</a>
+        <a href="#how" class="btn-secondary">{t('hero.ctaSecondary')}</a>
+      </div>
+      <p class="mt-6 text-sm text-[var(--muted)]">{t('hero.trust')}</p>
+    </div>
+
+    <div class="reveal delay-1 card overflow-hidden p-6">
+      <div class="grid grid-cols-2 gap-3">
+        <div class="rounded-xl bg-[#edf7f4] p-4">
+          <p class="text-xs uppercase text-[var(--muted)]">KPI</p>
+          <p class="mt-1 text-2xl font-semibold">98%</p>
+          <p class="text-sm text-[var(--muted)]">On-time payments</p>
+        </div>
+        <div class="rounded-xl bg-[#eaf3f9] p-4">
+          <p class="text-xs uppercase text-[var(--muted)]">Time</p>
+          <p class="mt-1 text-2xl font-semibold">-40%</p>
+          <p class="text-sm text-[var(--muted)]">Manual work</p>
+        </div>
+        <div class="col-span-2 rounded-xl bg-[#fff8ea] p-4">
+          <p class="text-xs uppercase text-[var(--muted)]">Profit KÜ</p>
+          <p class="mt-1 text-lg font-medium">Board workflows, resident portal, accounting clarity.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
