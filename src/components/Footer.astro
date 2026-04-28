@@ -12,8 +12,23 @@ const year = new Date().getFullYear();
 ---
 
 <footer class="border-t border-[var(--line)] bg-white/60 py-8">
-  <div class="container-shell flex flex-col gap-4 text-sm text-[var(--muted)] md:flex-row md:items-center md:justify-between">
-    <p>Profit KÜ © {year}. {t('footer.rights')}</p>
+  <div class="container-shell flex flex-col gap-4 text-sm text-[var(--muted)] md:gap-6">
+    <p>Intellisoft OÜ © {year}. {t('footer.rights')}</p>
+    <div class="grid gap-1">
+      <p>
+        Email:
+        <a class="underline" href="mailto:info@intellisoft.ee">info@intellisoft.ee</a>
+      </p>
+      <p>Kivi 21-1, Tartu 51009, Estonia</p>
+      <p>Reg. no: 10851992</p>
+      <p>VAT code: EE123456789</p>
+      <p>
+        Phone:
+        <a class="underline" href="tel:+3725104059">+372 5104 059</a>
+      </p>
+      <p>EE302200221019427738 Swedbank</p>
+      <p>EE587700771010962933 LHV</p>
+    </div>
     <div class="flex gap-3">
       <a class={locale === 'et' ? 'font-semibold text-[var(--ink)]' : ''} href="/">{t('lang.et')}</a>
       <a class={locale === 'en' ? 'font-semibold text-[var(--ink)]' : ''} href="/en/">{t('lang.en')}</a>
