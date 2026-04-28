@@ -7,19 +7,22 @@ const { t } = Astro.props;
 
 const slides = [
   {
-    src: '/hero/slide-1.svg',
-    alt: 'Dashboard overview with payments and occupancy metrics',
-    caption: 'Daily overview'
+    src: '/hero/housing-crs-billing.png',
+    alt: t('hero.slides.1.alt'),
+    caption: t('hero.slides.1.caption'),
+    fit: 'contain'
   },
   {
-    src: '/hero/slide-2.svg',
-    alt: 'Resident portal with service request timeline',
-    caption: 'Resident portal'
+    src: '/hero/housing-crs-dashboard.png',
+    alt: t('hero.slides.2.alt'),
+    caption: t('hero.slides.2.caption'),
+    fit: 'contain'
   },
   {
-    src: '/hero/slide-3.svg',
-    alt: 'Board workflow view with approvals and reminders',
-    caption: 'Board workflow'
+    src: '/hero/housing-crs-portal.png',
+    alt: t('hero.slides.3.alt'),
+    caption: t('hero.slides.3.caption'),
+    fit: 'contain'
   }
 ];
 ---
@@ -43,7 +46,7 @@ const slides = [
       <div class="hero-carousel-track" data-track>
         {
           slides.map((slide, index) => (
-            <figure class="hero-slide" data-slide>
+            <figure class={`hero-slide ${index === 0 ? 'is-active' : ''}`} data-slide data-fit={slide.fit}>
               <img
                 src={slide.src}
                 alt={slide.alt}
@@ -111,7 +114,15 @@ const slides = [
     const swipeThreshold = 48;
 
     const render = () => {
-      track.style.transform = `translateX(-${active * 100}%)`;
+      slides.forEach((slide, index) => {
+        if (!(slide instanceof HTMLElement)) {
+          return;
+        }
+
+        const isActive = index === active;
+        slide.classList.toggle('is-active', isActive);
+        slide.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+      });
 
       dots.forEach((dot, index) => {
         if (!(dot instanceof HTMLButtonElement)) {
@@ -159,8 +170,6 @@ const slides = [
       deltaX = 0;
       isDragging = true;
       stopAuto();
-
-      track.style.transition = 'none';
       track.setPointerCapture(pointerId);
     };
 
@@ -170,8 +179,6 @@ const slides = [
       }
 
       deltaX = event.clientX - startX;
-      const offset = -(active * 100) + (deltaX / track.clientWidth) * 100;
-      track.style.transform = `translateX(${offset}%)`;
     };
 
     const pointerUp = (event: PointerEvent) => {
@@ -182,8 +189,9 @@ const slides = [
       isDragging = false;
       pointerId = null;
 
-      track.style.transition = '';
-      track.releasePointerCapture(event.pointerId);
+      if (track.hasPointerCapture(event.pointerId)) {
+        track.releasePointerCapture(event.pointerId);
+      }
 
       if (Math.abs(deltaX) > swipeThreshold) {
         moveTo(active + (deltaX < 0 ? 1 : -1));
