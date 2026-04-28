@@ -96,6 +96,104 @@ a {
 	animation-delay: 180ms;
 }
 
+.hero-carousel {
+	position: relative;
+	overflow: hidden;
+	padding: 0.8rem;
+}
+
+.hero-carousel-track {
+	display: flex;
+	transition: transform 360ms ease;
+	will-change: transform;
+}
+
+.hero-slide {
+	flex: 0 0 100%;
+	margin: 0;
+	position: relative;
+	border-radius: 0.9rem;
+	overflow: hidden;
+	background: #eef3f5;
+	border: 1px solid var(--line);
+	aspect-ratio: 4 / 3;
+}
+
+.hero-slide-image {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+.hero-slide-caption {
+	position: absolute;
+	left: 0.65rem;
+	bottom: 0.65rem;
+	margin: 0;
+	padding: 0.25rem 0.55rem;
+	font-size: 0.78rem;
+	font-weight: 600;
+	color: #0d2833;
+	border-radius: 999px;
+	background: rgba(255, 255, 255, 0.92);
+	border: 1px solid rgba(21, 32, 41, 0.1);
+	backdrop-filter: blur(3px);
+}
+
+.hero-carousel-controls {
+	margin-top: 0.65rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.4rem;
+}
+
+.hero-carousel-btn {
+	width: 2rem;
+	height: 2rem;
+	border-radius: 999px;
+	border: 1px solid var(--line);
+	background: #ffffff;
+	color: var(--ink);
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: transform 140ms ease, background-color 140ms ease;
+}
+
+.hero-carousel-btn:hover {
+	transform: translateY(-1px);
+	background: #f7fbfd;
+}
+
+.hero-carousel-dots {
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	gap: 0.45rem;
+	min-height: 2rem;
+	align-items: center;
+}
+
+.hero-carousel-dot {
+	width: 0.58rem;
+	height: 0.58rem;
+	border-radius: 999px;
+	border: 0;
+	background: #b8c3cb;
+	opacity: 0.9;
+	padding: 0;
+	cursor: pointer;
+	transition: transform 140ms ease, background-color 140ms ease;
+}
+
+.hero-carousel-dot[aria-current='true'] {
+	background: var(--accent-2);
+	transform: scale(1.15);
+}
+
 @keyframes rise {
 	to {
 		opacity: 1;
@@ -103,8 +201,18 @@ a {
 	}
 }
 
+@media (prefers-reduced-motion: reduce) {
+	.hero-carousel-track {
+		transition: none;
+	}
+}
+
 @media (max-width: 768px) {
 	.section {
 		padding: 3.3rem 0;
+	}
+
+	.hero-slide {
+		aspect-ratio: 5 / 4;
 	}
 }

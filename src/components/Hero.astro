@@ -4,6 +4,24 @@ interface Props {
 }
 
 const { t } = Astro.props;
+
+const slides = [
+  {
+    src: '/hero/slide-1.svg',
+    alt: 'Dashboard overview with payments and occupancy metrics',
+    caption: 'Daily overview'
+  },
+  {
+    src: '/hero/slide-2.svg',
+    alt: 'Resident portal with service request timeline',
+    caption: 'Resident portal'
+  },
+  {
+    src: '/hero/slide-3.svg',
+    alt: 'Board workflow view with approvals and reminders',
+    caption: 'Board workflow'
+  }
+];
 ---
 
 <section class="section">
@@ -21,23 +39,148 @@ const { t } = Astro.props;
       <p class="mt-6 text-sm text-[var(--muted)]">{t('hero.trust')}</p>
     </div>
 
-    <div class="reveal delay-1 card overflow-hidden p-6">
-      <div class="grid grid-cols-2 gap-3">
-        <div class="rounded-xl bg-[#edf7f4] p-4">
-          <p class="text-xs uppercase text-[var(--muted)]">KPI</p>
-          <p class="mt-1 text-2xl font-semibold">98%</p>
-          <p class="text-sm text-[var(--muted)]">On-time payments</p>
+    <div class="reveal delay-1 card hero-carousel" data-hero-carousel aria-label="Product image carousel">
+      <div class="hero-carousel-track" data-track>
+        {
+          slides.map((slide, index) => (
+            <figure class="hero-slide" data-slide>
+              <img
+                src={slide.src}
+                alt={slide.alt}
+                loading={index === 0 ? 'eager' : 'lazy'}
+                decoding="async"
+                class="hero-slide-image"
+              />
+              <figcaption class="hero-slide-caption">{slide.caption}</figcaption>
+            </figure>
+          ))
+        }
+      </div>
+
+      <div class="hero-carousel-controls" aria-label="Carousel controls">
+        <button type="button" class="hero-carousel-btn" data-prev aria-label="Previous image">
+          <span aria-hidden="true">&#8592;</span>
+        </button>
+        <div class="hero-carousel-dots" role="tablist" aria-label="Slide picker">
+          {
+            slides.map((slide, index) => (
+              <button
+                type="button"
+                class="hero-carousel-dot"
+                data-dot
+                data-index={index}
+                aria-label={`Show slide ${index + 1}: ${slide.caption}`}
+              ></button>
+            ))
+          }
         </div>
-        <div class="rounded-xl bg-[#eaf3f9] p-4">
-          <p class="text-xs uppercase text-[var(--muted)]">Time</p>
-          <p class="mt-1 text-2xl font-semibold">-40%</p>
-          <p class="text-sm text-[var(--muted)]">Manual work</p>
-        </div>
-        <div class="col-span-2 rounded-xl bg-[#fff8ea] p-4">
-          <p class="text-xs uppercase text-[var(--muted)]">Profit KÜ</p>
-          <p class="mt-1 text-lg font-medium">Board workflows, resident portal, accounting clarity.</p>
-        </div>
+        <button type="button" class="hero-carousel-btn" data-next aria-label="Next image">
+          <span aria-hidden="true">&#8594;</span>
+        </button>
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  const carousels = document.querySelectorAll('[data-hero-carousel]');
+
+  for (const carousel of carousels) {
+    if (!(carousel instanceof HTMLElement)) {
+      continue;
+    }
+
+    const track = carousel.querySelector('[data-track]');
+    const slides = carousel.querySelectorAll('[data-slide]');
+    const dots = carousel.querySelectorAll('[data-dot]');
+    const prev = carousel.querySelector('[data-prev]');
+    const next = carousel.querySelector('[data-next]');
+
+    if (!(track instanceof HTMLElement) || slides.length < 2) {
+      continue;
+    }
+
+    let active = 0;
+    let timer: ReturnType<typeof window.setInterval> | undefined;
+    const autoplayMs = 4200;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const render = () => {
+      track.style.transform = `translateX(-${active * 100}%)`;
+
+      dots.forEach((dot, index) => {
+        if (!(dot instanceof HTMLButtonElement)) {
+          return;
+        }
+
+        const isActive = index === active;
+        dot.setAttribute('aria-current', isActive ? 'true' : 'false');
+        dot.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
+    };
+
+    const stopAuto = () => {
+      if (timer) {
+        window.clearInterval(timer);
+        timer = undefined;
+      }
+    };
+
+    const startAuto = () => {
+      if (reducedMotion) {
+        return;
+      }
+
+      stopAuto();
+      timer = window.setInterval(() => {
+        active = (active + 1) % slides.length;
+        render();
+      }, autoplayMs);
+    };
+
+    const moveTo = (index: number) => {
+      active = (index + slides.length) % slides.length;
+      render();
+      startAuto();
+    };
+
+    prev?.addEventListener('click', () => moveTo(active - 1));
+    next?.addEventListener('click', () => moveTo(active + 1));
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => moveTo(index));
+    });
+
+    carousel.addEventListener('mouseenter', stopAuto);
+    carousel.addEventListener('mouseleave', startAuto);
+    carousel.addEventListener('focusin', stopAuto);
+    carousel.addEventListener('focusout', startAuto);
+    carousel.addEventListener('keydown', (event) => {
+      if (!(event instanceof KeyboardEvent)) {
+        return;
+      }
+
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        moveTo(active - 1);
+      }
+
+      if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        moveTo(active + 1);
+      }
+    });
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        stopAuto();
+        return;
+      }
+
+      startAuto();
+    });
+
+    render();
+    startAuto();
+  }
+</script>

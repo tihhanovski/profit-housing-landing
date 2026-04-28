@@ -35,6 +35,8 @@
   "how.3.title": "Automate routines",
   "how.3.desc": "Billing, reminders, and reporting run on autopilot.",
   "pricing.title": "Simple and transparent pricing",
+  "pricing.price": "0.50 eur",
+  "pricing.unit": "per apartment per month",
   "pricing.subtitle": "0.50 EUR per apartment per month.",
   "pricing.notice.free": "First 3 months free.",
   "pricing.notice.special": "Special prices are available for accounting companies and management companies.",
@@ -78,5 +80,7 @@
   "footer.rights": "All rights reserved.",
   "lang.et": "ET",
   "lang.en": "EN",
-  "lang.ru": "RU"
+  "lang.ru": "RU",
+  "pricing.notice.vat": "VAT will be added",
+  "pricing.notice.ai_features": "Using AI features (automatic recognition of purchase invoices and receipts, etc.) may incur additional costs, which are calculated based on usage."
 }

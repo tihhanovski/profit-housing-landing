@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="960" viewBox="0 0 1280 960" role="img" aria-labelledby="title desc">
+  <title id="title">Workflow board placeholder</title>
+  <desc id="desc">Placeholder board workflow with approval columns.</desc>
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f6f0e2"/>
+      <stop offset="100%" stop-color="#e9f3fb"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="960" fill="url(#bg3)"/>
+  <rect x="90" y="90" width="1100" height="780" rx="28" fill="#ffffff" opacity="0.96"/>
+  <rect x="150" y="160" width="980" height="90" rx="16" fill="#f4f8fb"/>
+  <text x="190" y="218" font-family="IBM Plex Sans, sans-serif" font-size="34" fill="#1b2f3b">Board Workflow</text>
+  <rect x="150" y="290" width="290" height="520" rx="18" fill="#f8fbfc" stroke="#dce4ea"/>
+  <rect x="495" y="290" width="290" height="520" rx="18" fill="#f8fbfc" stroke="#dce4ea"/>
+  <rect x="840" y="290" width="290" height="520" rx="18" fill="#f8fbfc" stroke="#dce4ea"/>
+  <rect x="180" y="340" width="230" height="110" rx="14" fill="#e9f6f2"/>
+  <rect x="180" y="480" width="230" height="130" rx="14" fill="#e8f1fa"/>
+  <rect x="180" y="640" width="230" height="130" rx="14" fill="#fff4de"/>
+  <rect x="525" y="340" width="230" height="130" rx="14" fill="#e8f1fa"/>
+  <rect x="525" y="500" width="230" height="120" rx="14" fill="#e9f6f2"/>
+  <rect x="870" y="340" width="230" height="160" rx="14" fill="#fff4de"/>
+  <rect x="870" y="530" width="230" height="120" rx="14" fill="#e9f6f2"/>
+  <circle cx="1000" cy="720" r="34" fill="#0f8a70"/>
+  <path d="M984 720l12 12 22-24" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

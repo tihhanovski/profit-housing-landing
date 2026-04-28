@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="960" viewBox="0 0 1280 960" role="img" aria-labelledby="title desc">
+  <title id="title">Dashboard placeholder</title>
+  <desc id="desc">Placeholder product dashboard with cards and chart.</desc>
+  <defs>
+    <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#d9efe9"/>
+      <stop offset="100%" stop-color="#e8f2fb"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="960" fill="url(#bg1)"/>
+  <rect x="90" y="90" width="1100" height="780" rx="28" fill="#ffffff" opacity="0.95"/>
+  <rect x="140" y="160" width="300" height="140" rx="16" fill="#e9f6f2"/>
+  <rect x="470" y="160" width="300" height="140" rx="16" fill="#e8f1fa"/>
+  <rect x="800" y="160" width="330" height="140" rx="16" fill="#fff4de"/>
+  <rect x="140" y="340" width="660" height="420" rx="18" fill="#f7fafc" stroke="#dce4ea"/>
+  <rect x="830" y="340" width="300" height="420" rx="18" fill="#f8fbfd" stroke="#dce4ea"/>
+  <polyline points="180,650 290,560 390,600 500,500 620,540 760,430" fill="none" stroke="#1f6f8b" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="760" cy="430" r="14" fill="#0f8a70"/>
+  <rect x="870" y="390" width="220" height="30" rx="10" fill="#dce9f2"/>
+  <rect x="870" y="445" width="180" height="24" rx="10" fill="#e2edf4"/>
+  <rect x="870" y="500" width="210" height="24" rx="10" fill="#e2edf4"/>
+  <rect x="870" y="555" width="165" height="24" rx="10" fill="#e2edf4"/>
+  <text x="140" y="120" font-family="IBM Plex Sans, sans-serif" font-size="34" fill="#1b2f3b">Profit KÜ Dashboard</text>
+</svg>

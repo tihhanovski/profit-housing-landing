@@ -35,6 +35,8 @@
   "how.3.title": "Automatiseeri rutiin",
   "how.3.desc": "Arvete koostamine, meeldetuletused ja raportid toimuvad automaatselt.",
   "pricing.title": "Lihtne ja läbipaistev hinnastamine",
+  "pricing.price": "0.50 eurot",
+  "pricing.unit": "korteri kohta kuus",
   "pricing.subtitle": "0.50 EUR korteri kohta kuus.",
   "pricing.notice.free": "Esimesed 3 kuud tasuta.",
   "pricing.notice.special": "Raamatupidamisburoodele ja haldusfirmadele kehtivad erihinnad.",
@@ -78,5 +80,7 @@
   "footer.rights": "Kõik õigused kaitstud.",
   "lang.et": "ET",
   "lang.en": "EN",
-  "lang.ru": "RU"
+  "lang.ru": "RU",
+  "pricing.notice.vat": "Lisandub käibemaks",
+  "pricing.notice.ai_features": "AI funktsioonide kasutamine (ostuarvete ja tšekkide automaatne tuvastamine jm) võib kaasa tuua lisakulusid, mis arvestatakse vastavalt kasutusele."
 }
