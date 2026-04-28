@@ -99,13 +99,17 @@ a {
 .hero-carousel {
 	position: relative;
 	overflow: hidden;
-	padding: 0.8rem;
+	padding: 0;
+	background: transparent;
+	border: 0;
+	box-shadow: none;
 }
 
 .hero-carousel-track {
 	display: flex;
 	transition: transform 360ms ease;
 	will-change: transform;
+	touch-action: pan-y;
 }
 
 .hero-slide {
@@ -115,7 +119,7 @@ a {
 	border-radius: 0.9rem;
 	overflow: hidden;
 	background: #eef3f5;
-	border: 1px solid var(--line);
+	border: 0;
 	aspect-ratio: 4 / 3;
 }
 
@@ -142,11 +146,25 @@ a {
 }
 
 .hero-carousel-controls {
-	margin-top: 0.65rem;
+	position: absolute;
+	left: 0.6rem;
+	right: 0.6rem;
+	bottom: 0.6rem;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	gap: 0.4rem;
+	opacity: 0;
+	pointer-events: none;
+	transform: translateY(6px);
+	transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.hero-carousel:hover .hero-carousel-controls,
+.hero-carousel:focus-within .hero-carousel-controls {
+	opacity: 1;
+	pointer-events: auto;
+	transform: translateY(0);
 }
 
 .hero-carousel-btn {
@@ -154,7 +172,7 @@ a {
 	height: 2rem;
 	border-radius: 999px;
 	border: 1px solid var(--line);
-	background: #ffffff;
+	background: rgba(255, 255, 255, 0.9);
 	color: var(--ink);
 	display: inline-flex;
 	align-items: center;
@@ -175,6 +193,10 @@ a {
 	gap: 0.45rem;
 	min-height: 2rem;
 	align-items: center;
+	padding: 0 0.55rem;
+	border-radius: 999px;
+	background: rgba(255, 255, 255, 0.74);
+	backdrop-filter: blur(4px);
 }
 
 .hero-carousel-dot {
@@ -214,5 +236,13 @@ a {
 
 	.hero-slide {
 		aspect-ratio: 5 / 4;
+	}
+}
+
+@media (hover: none) {
+	.hero-carousel-controls {
+		opacity: 1;
+		pointer-events: auto;
+		transform: translateY(0);
 	}
 }

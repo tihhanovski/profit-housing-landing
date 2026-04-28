@@ -39,7 +39,7 @@ const slides = [
       <p class="mt-6 text-sm text-[var(--muted)]">{t('hero.trust')}</p>
     </div>
 
-    <div class="reveal delay-1 card hero-carousel" data-hero-carousel aria-label="Product image carousel">
+    <div class="reveal delay-1 hero-carousel" data-hero-carousel aria-label="Product image carousel">
       <div class="hero-carousel-track" data-track>
         {
           slides.map((slide, index) => (
@@ -104,6 +104,11 @@ const slides = [
     let timer: ReturnType<typeof window.setInterval> | undefined;
     const autoplayMs = 4200;
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let pointerId: number | null = null;
+    let startX = 0;
+    let deltaX = 0;
+    let isDragging = false;
+    const swipeThreshold = 48;
 
     const render = () => {
       track.style.transform = `translateX(-${active * 100}%)`;
@@ -144,6 +149,51 @@ const slides = [
       startAuto();
     };
 
+    const pointerDown = (event: PointerEvent) => {
+      if (event.pointerType === 'mouse') {
+        return;
+      }
+
+      pointerId = event.pointerId;
+      startX = event.clientX;
+      deltaX = 0;
+      isDragging = true;
+      stopAuto();
+
+      track.style.transition = 'none';
+      track.setPointerCapture(pointerId);
+    };
+
+    const pointerMove = (event: PointerEvent) => {
+      if (!isDragging || pointerId !== event.pointerId) {
+        return;
+      }
+
+      deltaX = event.clientX - startX;
+      const offset = -(active * 100) + (deltaX / track.clientWidth) * 100;
+      track.style.transform = `translateX(${offset}%)`;
+    };
+
+    const pointerUp = (event: PointerEvent) => {
+      if (!isDragging || pointerId !== event.pointerId) {
+        return;
+      }
+
+      isDragging = false;
+      pointerId = null;
+
+      track.style.transition = '';
+      track.releasePointerCapture(event.pointerId);
+
+      if (Math.abs(deltaX) > swipeThreshold) {
+        moveTo(active + (deltaX < 0 ? 1 : -1));
+        return;
+      }
+
+      render();
+      startAuto();
+    };
+
     prev?.addEventListener('click', () => moveTo(active - 1));
     next?.addEventListener('click', () => moveTo(active + 1));
 
@@ -155,6 +205,10 @@ const slides = [
     carousel.addEventListener('mouseleave', startAuto);
     carousel.addEventListener('focusin', stopAuto);
     carousel.addEventListener('focusout', startAuto);
+    track.addEventListener('pointerdown', pointerDown);
+    track.addEventListener('pointermove', pointerMove);
+    track.addEventListener('pointerup', pointerUp);
+    track.addEventListener('pointercancel', pointerUp);
     carousel.addEventListener('keydown', (event) => {
       if (!(event instanceof KeyboardEvent)) {
         return;
