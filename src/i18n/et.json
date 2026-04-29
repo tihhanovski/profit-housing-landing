@@ -74,7 +74,7 @@
   "faq.2.q": "Kas saan olemasolevad andmed üle tuua?",
   "faq.2.a": "Jah, aitame importida korterid, omanikud ja algsaldod.",
   "faq.3.q": "Kas prooviperiood on olemas?",
-  "faq.3.a": "Jah, 14 päeva tasuta ilma siduva lepinguta.",
+  "faq.3.a": "Jah, 3 kuud tasuta ilma siduva lepinguta.",
   "contact.title": "Võta ühendust",
   "contact.subtitle": "Kirjelda oma maja vajadusi ja saadame sobiva lahenduse.",
   "contact.name": "Nimi",
@@ -87,6 +87,6 @@
   "lang.et": "ET",
   "lang.en": "EN",
   "lang.ru": "RU",
-  "pricing.notice.vat": "Lisandub käibemaks",
+  "pricing.notice.vat": "Hindadele lisandub käibemaks",
   "pricing.notice.ai_features": "AI funktsioonide kasutamine (ostuarvete ja tšekkide automaatne tuvastamine jm) võib kaasa tuua lisakulusid, mis arvestatakse vastavalt kasutusele."
 }
