@@ -8,10 +8,86 @@ interface Props {
   locale: Locale;
   title: string;
   description: string;
+  faqItems?: Array<{
+    question: string;
+    answer: string;
+  }>;
 }
 
-const { locale, title, description } = Astro.props;
+const { locale, title, description, faqItems = [] } = Astro.props;
 const t = useTranslations(locale);
+
+const siteUrl = Astro.site ?? new URL('https://housing.profit24.eu');
+const pathWithoutLocale = Astro.url.pathname.replace(/^\/(en|ru)(?=\/|$)/, '');
+const localePath = (target: Locale) => (target === 'et' ? pathWithoutLocale : `/${target}${pathWithoutLocale}`);
+
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
+const hreflang = {
+  et: new URL(localePath('et'), siteUrl).toString(),
+  en: new URL(localePath('en'), siteUrl).toString(),
+  ru: new URL(localePath('ru'), siteUrl).toString()
+};
+
+const ogLocaleMap: Record<Locale, string> = {
+  et: 'et_EE',
+  en: 'en_US',
+  ru: 'ru_RU'
+};
+
+const ogImageUrl = new URL('/hero/housing-crs-dashboard.png', siteUrl).toString();
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Intellisoft OU',
+  url: siteUrl.toString(),
+  logo: new URL('/logo.svg', siteUrl).toString(),
+  email: 'info@intellisoft.ee',
+  telephone: '+3725104059',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Kivi 21-1',
+    addressLocality: 'Tartu',
+    postalCode: '51009',
+    addressCountry: 'EE'
+  }
+};
+
+const softwareApplicationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Profit KU',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  offers: {
+    '@type': 'Offer',
+    price: '0.50',
+    priceCurrency: 'EUR',
+    description: 'Per apartment per month'
+  },
+  inLanguage: locale,
+  description,
+  url: canonicalUrl,
+  image: ogImageUrl,
+  publisher: {
+    '@type': 'Organization',
+    name: 'Intellisoft OU'
+  }
+};
+
+const faqSchema = faqItems.length
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faqItems.map((item) => ({
+        '@type': 'Question',
+        name: item.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: item.answer
+        }
+      }))
+    }
+  : null;
 ---
 
 <!doctype html>
@@ -20,7 +96,27 @@ const t = useTranslations(locale);
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
     <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang="et" href={hreflang.et} />
+    <link rel="alternate" hreflang="en" href={hreflang.en} />
+    <link rel="alternate" hreflang="ru" href={hreflang.ru} />
+    <link rel="alternate" hreflang="x-default" href={hreflang.et} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Profit KU" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:locale" content={ogLocaleMap[locale]} />
+    <meta property="og:locale:alternate" content="et_EE" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta property="og:locale:alternate" content="ru_RU" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -30,6 +126,9 @@ const t = useTranslations(locale);
       rel="stylesheet"
     />
     <title>{title}</title>
+    <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)}></script>
+    <script type="application/ld+json" set:html={JSON.stringify(softwareApplicationSchema)}></script>
+    {faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)}></script>}
   </head>
   <body>
     <Nav locale={locale} t={t} />

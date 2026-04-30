@@ -1,0 +1,32 @@
+# Profit KU
+
+> Multilingual landing page for Profit KU, a web platform for housing association management in Estonia.
+
+## Product
+- Name: Profit KU
+- URL: https://housing.profit24.eu/
+- Category: Housing association management software
+- Audience: Board members, residents, accountants, property managers
+- Languages: Estonian, English, Russian
+
+## Core Features
+- Invoicing and payment tracking
+- Resident communication and announcements
+- Document storage for protocols and contracts
+- Meter reading and resident portal workflows
+- Accounting-ready financial records
+
+## Pricing
+- Starting price: 0.50 EUR per apartment per month
+- Free trial: first 3 months free
+- VAT: added where applicable
+- Note: selected AI features may incur usage-based additional costs
+
+## Company
+- Legal name: Intellisoft OU
+- Email: info@intellisoft.ee
+- Phone: +372 5104 059
+- Address: Kivi 21-1, Tartu 51009, Estonia
+
+## Contact
+- Landing contact form: https://housing.profit24.eu/#contact

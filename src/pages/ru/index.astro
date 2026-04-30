@@ -12,9 +12,13 @@ import { useTranslations } from '../../i18n/utils';
 
 const locale = 'ru';
 const t = useTranslations(locale);
+const faqItems = [1, 2, 3].map((n) => ({
+  question: t(`faq.${n}.q`),
+  answer: t(`faq.${n}.a`)
+}));
 ---
 
-<Base locale={locale} title={t('meta.title')} description={t('meta.description')}>
+<Base locale={locale} title={t('meta.title')} description={t('meta.description')} faqItems={faqItems}>
   <Hero t={t} />
   <Features t={t} />
   <HowItWorks t={t} />
