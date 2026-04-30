@@ -1,25 +1,31 @@
 ---
+import { Image } from 'astro:assets';
+
 interface Props {
   t: (key: string) => string;
 }
 
 const { t } = Astro.props;
 
+import billingSlide from '../assets/hero/housing-crs-billing.png';
+import dashboardSlide from '../assets/hero/housing-crs-dashboard.png';
+import portalSlide from '../assets/hero/housing-crs-portal.png';
+
 const slides = [
   {
-    src: '/hero/housing-crs-billing.png',
+    src: billingSlide,
     alt: t('hero.slides.1.alt'),
     caption: t('hero.slides.1.caption'),
     fit: 'contain'
   },
   {
-    src: '/hero/housing-crs-dashboard.png',
+    src: dashboardSlide,
     alt: t('hero.slides.2.alt'),
     caption: t('hero.slides.2.caption'),
     fit: 'contain'
   },
   {
-    src: '/hero/housing-crs-portal.png',
+    src: portalSlide,
     alt: t('hero.slides.3.alt'),
     caption: t('hero.slides.3.caption'),
     fit: 'contain'
@@ -47,9 +53,13 @@ const slides = [
         {
           slides.map((slide, index) => (
             <figure class={`hero-slide ${index === 0 ? 'is-active' : ''}`} data-slide data-fit={slide.fit}>
-              <img
+              <Image
                 src={slide.src}
                 alt={slide.alt}
+                format="webp"
+                widths={[420, 560, 738, 960]}
+                sizes="(min-width: 768px) 50vw, 100vw"
+                fetchpriority={index === 0 ? 'high' : 'auto'}
                 loading={index === 0 ? 'eager' : 'lazy'}
                 decoding="async"
                 class="hero-slide-image"
