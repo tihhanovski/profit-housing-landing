@@ -1,4 +1,7 @@
 ---
+import DefaultContact from './DefaultContact.astro';
+import MauticContact from './MauticContact.astro';
+
 interface Props {
   t: (key: string) => string;
 }
@@ -19,109 +22,12 @@ const endpoint = 'https://mautic.intellisoft.ee/form/submit';
       </p>
     </div>
 
+    <!-- <DefaultContact t={t} /> -->
     <div class="p-8 md:col-span-3">
-      <form
-        id="mautic-contact-form"
-        class="space-y-4"
-        action={endpoint}
-        method="POST"
-        data-form-id={mauticFormId}
-        data-success-text={t('contact.success')}
-        data-error-text={t('contact.error')}
-      >
-        <input type="hidden" name="mauticform[formId]" value={mauticFormId} />
-        <input type="hidden" name="mauticform[formName]" value={mauticFormName} />
-        <input type="hidden" name="mauticform[return]" value="" />
-        <input type="hidden" name="mauticform[messenger]" value="1" />
-
-        <label class="block">
-          <span class="mb-1 block text-sm font-medium">{t('contact.name')}</span>
-          <input
-            class="w-full rounded-xl border border-[var(--line)] px-4 py-3"
-            name="mauticform[nimi]"
-            autocomplete="name"
-            required
-          />
-        </label>
-
-        <label class="block">
-          <span class="mb-1 block text-sm font-medium">{t('contact.email')}</span>
-          <input
-            class="w-full rounded-xl border border-[var(--line)] px-4 py-3"
-            type="email"
-            name="mauticform[email]"
-            autocomplete="email"
-            required
-          />
-        </label>
-
-        <label class="block">
-          <span class="mb-1 block text-sm font-medium">{t('contact.message')}</span>
-          <textarea
-            class="min-h-28 w-full rounded-xl border border-[var(--line)] px-4 py-3"
-            name="mauticform[f_message]"
-            required
-          ></textarea>
-        </label>
-
-        <button class="btn-primary w-full sm:w-auto" type="submit">{t('contact.submit')}</button>
-        <p id="mautic-status" class="text-sm text-[var(--muted)]" aria-live="polite"></p>
-      </form>
-      <noscript>
-        <p class="mt-4 text-sm text-[var(--muted)]">
-          JavaScript is required for inline submit feedback.
-        </p>
-      </noscript>
+      <MauticContact t={t} />
     </div>
+
+
   </div>
 </section>
 
-<script>
-  const form = document.getElementById('mautic-contact-form');
-  const status = document.getElementById('mautic-status');
-
-  if (form instanceof HTMLFormElement && status) {
-    const hiddenReturn = form.querySelector('input[name="mauticform[return]"]');
-    if (hiddenReturn instanceof HTMLInputElement) {
-      hiddenReturn.value = window.location.href;
-    }
-
-    form.addEventListener('submit', async (event) => {
-      event.preventDefault();
-      status.textContent = 'Submitting...';
-
-      const formData = new FormData(form);
-      const payload = new URLSearchParams();
-      for (const [key, value] of formData.entries()) {
-        payload.append(key, String(value));
-      }
-
-      const formId = form.dataset.formId ?? '1';
-      const endpoint = `${form.action}?formId=${encodeURIComponent(formId)}`;
-
-      try {
-        const response = await fetch(endpoint, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-          },
-          body: payload,
-          mode: 'cors'
-        });
-
-        const responseText = await response.text();
-        console.log('Mautic form response:', responseText);
-
-        if (!response.ok) {
-          throw new Error(`HTTP ${response.status}`);
-        }
-
-        status.textContent = form.dataset.successText ?? 'Thank you!';
-        form.reset();
-      } catch (error) {
-        console.error('Form submission error:', error);
-        status.textContent = form.dataset.errorText ?? 'Submission failed.';
-      }
-    });
-  }
-</script>
