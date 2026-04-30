@@ -9,6 +9,9 @@ export default defineConfig({
   site: 'https://housing.profit24.eu',
   output: 'static',
   outDir: './docs',
+  build: {
+    inlineStylesheets: 'always'
+  },
   i18n: {
     defaultLocale: 'et',
     locales: ['et', 'en', 'ru'],
