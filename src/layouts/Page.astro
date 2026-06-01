@@ -1,0 +1,26 @@
+---
+import Audience from '../components/Audience.astro';
+import ContactCTA from '../components/ContactCTA.astro';
+import Features from '../components/Features.astro';
+import Footer from '../components/Footer.astro';
+import Hero from '../components/Hero.astro';
+import HowToStart from '../components/HowToStart.astro';
+import Pricing from '../components/Pricing.astro';
+import { useTranslations } from '../i18n/utils';
+import Base from './Base.astro';
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+---
+<Base locale={locale} title={t('meta.title')} description={t('meta.description')}>
+  <Hero t={t} />
+  <Audience t={t} />
+  <Features t={t} />
+  <Pricing t={t} />
+  <HowToStart t={t} />
+  <!-- <Testimonials t={t} /> -->
+  <!-- <FAQ t={t} /> -->
+  <ContactCTA t={t} />
+  <Footer locale={locale} t={t} />
+</Base>

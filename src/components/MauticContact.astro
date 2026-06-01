@@ -260,7 +260,7 @@ const { t } = Astro.props;
                     <label
                         id="mauticform_label_profit24housingcontact_nimi"
                         for="mauticform_input_profit24housingcontact_nimi"
-                        class="mauticform-label">Nimi</label
+                        class="mauticform-label">{t('mautic.name')}</label
                     >
 
                     <input
@@ -272,7 +272,7 @@ const { t } = Astro.props;
                     />
 
                     <span class="mauticform-errormsg" style="display:none;"
-                        >name expected</span
+                        >{t('mautic.name.expected')}</span
                     >
                 </div>
 
@@ -285,7 +285,7 @@ const { t } = Astro.props;
                     <label
                         id="mauticform_label_profit24housingcontact_email"
                         for="mauticform_input_profit24housingcontact_email"
-                        class="mauticform-label">E-mail</label
+                        class="mauticform-label">{t('mautic.email')}</label
                     >
 
                     <input
@@ -297,7 +297,7 @@ const { t } = Astro.props;
                     />
 
                     <span class="mauticform-errormsg" style="display:none;"
-                        >This is required.</span
+                        >{t('mautic.email.expected')}</span
                     >
                 </div>
 
@@ -308,7 +308,7 @@ const { t } = Astro.props;
                     <label
                         id="mauticform_label_profit24housingcontact_f_message"
                         for="mauticform_input_profit24housingcontact_f_message"
-                        class="mauticform-label">Message</label
+                        class="mauticform-label">{t('mautic.message')}</label
                     >
 
                     <textarea
@@ -329,7 +329,7 @@ const { t } = Astro.props;
                         name="mauticform[submit]"
                         value="1"
                         id="mauticform_input_profit24housingcontact_submit"
-                        type="submit">Submit</button
+                        type="submit">{t('mautic.submit')}</button
                     >
                 </div>
             </div>

@@ -1,6 +1,6 @@
 # Profit KU
 
-> Multilingual landing page for Profit KU, a web platform for housing association management in Estonia.
+> Landing page for Profit KU, a web platform for housing association management.
 
 ## Product
 - Name: Profit KU
@@ -11,16 +11,14 @@
 
 ## Core Features
 - Invoicing and payment tracking
-- Resident communication and announcements
-- Document storage for protocols and contracts
 - Meter reading and resident portal workflows
-- Accounting-ready financial records
+- Full-scaled accounting
 
 ## Pricing
 - Starting price: 0.50 EUR per apartment per month
 - Free trial: first 3 months free
 - VAT: added where applicable
-- Note: selected AI features may incur usage-based additional costs
+- Note: selected AI features may incur usage-based additional costs, for example 0.01 to 0.03 EUR per recognized purchase invoice
 
 ## Company
 - Legal name: Intellisoft OU
