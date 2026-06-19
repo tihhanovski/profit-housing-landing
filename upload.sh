@@ -12,4 +12,4 @@ fi
 
 commit_time="$(date '+%Y-%m-%d %H:%M:%S %Z')"
 git commit -m "Deploy docs: ${commit_time}"
-git push origin master
+git push

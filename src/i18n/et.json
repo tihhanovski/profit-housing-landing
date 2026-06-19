@@ -116,6 +116,9 @@
   "mautic.name.expected": "Nimi on nõutud",
   "mautic.email": "E-post",
   "mautic.email.expected": "Kehtiv e-post on nõutud",
+  "mautic.phone": "Telefon",
+  "mautic.phone.expected": "Kehtiv telefoninumber on nõutud",
+  "mautic.wait": "Palun oota...",
 
   
   "footer.rights": "Kõik õigused kaitstud.",

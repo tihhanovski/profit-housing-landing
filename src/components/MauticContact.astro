@@ -24,7 +24,7 @@ const { t } = Astro.props;
         head.appendChild(script);
         var MauticDomain = "https://mautic.intellisoft.ee";
         var MauticLang = {
-            submittingMessage: "Please wait...",
+            submittingMessage: "   ⏳   ",
         };
     } else if (typeof MauticSDK != "undefined") {
         MauticSDK.onLoad();
@@ -138,7 +138,9 @@ const { t } = Astro.props;
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
-        transition: transform 160ms ease, filter 160ms ease;
+        transition:
+            transform 160ms ease,
+            filter 160ms ease;
     }
     .mauticform-button-wrapper .mauticform-button:hover,
     .mauticform-pagebreak-wrapper .mauticform-pagebreak:hover {
@@ -260,7 +262,7 @@ const { t } = Astro.props;
                     <label
                         id="mauticform_label_profit24housingcontact_nimi"
                         for="mauticform_input_profit24housingcontact_nimi"
-                        class="mauticform-label">{t('mautic.name')}</label
+                        class="mauticform-label">{t("mautic.name")}</label
                     >
 
                     <input
@@ -272,7 +274,7 @@ const { t } = Astro.props;
                     />
 
                     <span class="mauticform-errormsg" style="display:none;"
-                        >{t('mautic.name.expected')}</span
+                        >{t("mautic.name.expected")}</span
                     >
                 </div>
 
@@ -285,7 +287,7 @@ const { t } = Astro.props;
                     <label
                         id="mauticform_label_profit24housingcontact_email"
                         for="mauticform_input_profit24housingcontact_email"
-                        class="mauticform-label">{t('mautic.email')}</label
+                        class="mauticform-label">{t("mautic.email")}</label
                     >
 
                     <input
@@ -297,8 +299,30 @@ const { t } = Astro.props;
                     />
 
                     <span class="mauticform-errormsg" style="display:none;"
-                        >{t('mautic.email.expected')}</span
+                        >{t("mautic.email.expected")}</span
                     >
+                </div>
+
+                <div
+                    id="mauticform_profit24housingcontactet_telefon"
+                    class="mauticform-row mauticform-tel mauticform-field-3"
+                >
+                    <label
+                        id="mauticform_label_profit24housingcontactet_telefon"
+                        for="mauticform_input_profit24housingcontactet_telefon"
+                        class="mauticform-label">{t("mautic.phone")}</label
+                    >
+
+                    <input
+                        type="tel"
+                        name="mauticform[telefon]"
+                        value=""
+                        id="mauticform_input_profit24housingcontactet_telefon"
+                        class="mauticform-input"
+                    />
+
+                    <span class="mauticform-errormsg" style="display:none;"
+                    ></span>
                 </div>
 
                 <div
@@ -308,7 +332,7 @@ const { t } = Astro.props;
                     <label
                         id="mauticform_label_profit24housingcontact_f_message"
                         for="mauticform_input_profit24housingcontact_f_message"
-                        class="mauticform-label">{t('mautic.message')}</label
+                        class="mauticform-label">{t("mautic.message")}</label
                     >
 
                     <textarea
@@ -329,7 +353,7 @@ const { t } = Astro.props;
                         name="mauticform[submit]"
                         value="1"
                         id="mauticform_input_profit24housingcontact_submit"
-                        type="submit">{t('mautic.submit')}</button
+                        type="submit">{t("mautic.submit")}</button
                     >
                 </div>
             </div>
